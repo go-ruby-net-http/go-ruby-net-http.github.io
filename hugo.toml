@@ -1,0 +1,31 @@
+baseURL = "https://go-ruby-net-http.github.io/"
+title = "go-ruby-net-http"
+disableKinds = ["taxonomy", "term", "RSS", "sitemap", "404"]
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[[params.phases]]
+  name = "Request building"
+  status = "ready"
+  blurb = "`NewRequest` for `Get` / `Post` / `Put` / `Delete` / `Head` / `Patch` / `Options` — the request line, MRI's default headers in exact order and casing, `Content-Length` vs `Transfer-Encoding`, the empty-body default, `set_form_data` and Basic / Proxy-Basic auth — serialised **byte-for-byte** as MRI writes to the socket."
+[[params.phases]]
+  name = "Response parsing"
+  status = "ready"
+  blurb = "`ParseResponse` over a raw HTTP/1.1 byte stream: the status-line regex, header lines with obs-fold continuation and repeated multi-value fields, and the body decoded by **`Content-Length`** *or* chunked **`Transfer-Encoding`** (chunk extensions and trailers included)."
+[[params.phases]]
+  name = "Response subclass model"
+  status = "ready"
+  blurb = "Every status code mapped to its `Net::HTTPResponse` subclass (`HTTPOK`, `HTTPNotFound`, …) and category, generated from MRI's own `CODE_TO_OBJ`, with the `HAS_BODY` rule (1xx, 204, 205, 304 carry no body) and the `HTTPUnknownResponse` / category fallbacks."
+[[params.phases]]
+  name = "Net::HTTPHeader mixin"
+  status = "ready"
+  blurb = "`[]` / `[]=` / `key?` / `delete` / `add_field` / `get_fields` / `each_header` / `each_capitalized`, plus `content_type` / `content_length` / `chunked?` / `connection_close?` and the `URI.encode_www_form` component encoder."
+[[params.phases]]
+  name = "Socket / TLS seam"
+  status = "ready"
+  blurb = "The transport is the host's, by design: DNS, the `TCPSocket` and the TLS handshake stay outside. Hand `Request.Bytes` to your socket's write and feed everything read back to `ParseResponse` — the codec touches no network, file, or clock."
+[[params.phases]]
+  name = "Differential oracle & coverage"
+  status = "ready"
+  blurb = "Request bytes, response parse, the subclass over MRI's whole table and form encoding computed here and checked byte-for-byte against the system `ruby` (gated on Ruby ≥ 4.0); 100% coverage, gofmt + go vet clean, green across 6 arches and 3 OSes."
