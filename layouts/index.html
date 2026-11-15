@@ -41,11 +41,9 @@
   <div class="hero"><div class="wrap">
     <div>
       <h1 class="head">go-ruby-net-http</h1>
-      <p class="sub">Ruby's <code>Net::HTTP</code> HTTP/1.1 message codec — build request bytes and parse responses exactly as MRI — in pure Go, no cgo, no I/O.</p>
-      <div class="cta">
-        <a class="btn btn-primary" href="/docs/">{{ partial "icons/book.html" . }}Documentation</a>
-        <a class="btn btn-ghost" href="https://github.com/go-ruby-net-http/net-http">{{ partial "icons/github.html" . }}GitHub</a>
-      </div>
+      <p class="sub">Ruby's <code>Net::HTTP</code> HTTP/1.1 message codec — build request bytes and parse responses exactly as MRI — in {{ if partial "mantra-on.html" . }}Go{{ else }}pure Go{{ end }}, {{ if not (partial "mantra-on.html" $) }}no cgo{{ end }}, no I/O.</p>
+      {{/* [[params.cta]] in hugo.toml: the kit renders the row */}}
+      {{ partial "cta.html" . }}
       <div class="trust">{{ if not (partial "mantra-on.html" $) }}<span class="pill">pure Go · zero cgo</span>{{ end }}<span class="pill">Ruby <code>Net::HTTP</code></span><span class="pill">request bytes</span><span class="pill">response parse</span><span class="pill">chunked decode</span><span class="pill">HTTPResponse subclasses</span><span class="pill">Net::HTTPHeader</span><span class="pill">socket/TLS = host seam</span><span class="pill">MRI byte-exact</span><span class="pill">100% coverage</span><span class="pill">6 arches</span></div>
       <div class="legacy"><div class="badges">
       <a href="/docs/"><img alt="Documentation (MkDocs Material + mike)" src="https://img.shields.io/badge/docs-mkdocs--material-9B1C2E"></a>
